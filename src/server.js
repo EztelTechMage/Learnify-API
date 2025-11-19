@@ -3,7 +3,8 @@ const http = require('http');
 const mongoose = require('mongoose');
 const { app } = require('./app');
 
-const PORT = 5000;
+const PORT = process.env.PORT || 3001;
+
 const MONGODB_URI = 'mongodb+srv://Vercel-Admin-learnify:xDq2LZlEZJ1bw2tl@learnify.kxk8990.mongodb.net/?retryWrites=true&w=majority'
 
 async function start() {
