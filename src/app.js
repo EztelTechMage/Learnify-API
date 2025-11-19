@@ -26,6 +26,7 @@ const corsOptions = {
     'http://localhost:5000', // Alternative local port
     'https://learnify-lms-web.vercel.app', // Your Vercel deployment
     'https://*.vercel.app', // All Vercel subdomains
+    'learnify-lms-web.vercel.app'
   ].filter(Boolean), // Remove undefined values
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -52,6 +53,16 @@ app.use(
 // Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next) => {
+  console.log('=== REQUEST LOGGING MIDDLEWARE ===');
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  console.log('Headers:', req.headers);
+  console.log('Query params:', req.query);
+  console.log('Body:', req.body);
+  console.log('=== END REQUEST LOGGING ===');
+  next();
+});
 
 app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
