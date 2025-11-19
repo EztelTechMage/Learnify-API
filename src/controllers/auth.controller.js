@@ -10,6 +10,8 @@ function signToken(user) {
 
 async function signup(req, res) {
   try {
+    console.log("received signup req");
+
     const { name, email, password, role } = req.body;
     if (!name || !email || !password) return res.status(400).json({ error: 'Missing fields' });
     if (role && !USER_ROLES.includes(role)) return res.status(400).json({ error: 'Invalid role' });
